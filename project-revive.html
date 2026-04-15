@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revive — Ananya Mehta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a08;--bg2:#111110;--accent:#C0392B;--text:#f0ede8;--muted:#888880;--border:#2a2a26;--card:#141412}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.1s;mix-blend-mode:difference}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 4vw;display:flex;justify-content:space-between;align-items:center}
+nav::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,8,0.95),transparent);pointer-events:none;z-index:-1}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:var(--text);text-decoration:none}
+.back-btn{display:flex;align-items:center;gap:0.75rem;color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s}
+.back-btn:hover{color:var(--accent)}
+.proj-hero{height:90vh;position:relative;display:flex;align-items:flex-end;padding:6rem 4vw 4rem;overflow:hidden}
+.proj-hero-bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;filter:brightness(0.35)}
+.proj-hero-grad{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 20%,rgba(10,10,8,0.4) 60%,transparent 100%)}
+.proj-hero-content{position:relative;z-index:1;max-width:1400px;width:100%;margin:0 auto}
+.proj-category{font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,14rem);line-height:0.9;color:var(--text);margin-bottom:2rem}
+.proj-meta{display:flex;gap:4rem;flex-wrap:wrap}
+.proj-meta-item label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:0.4rem}
+.proj-meta-item span{font-size:0.9rem;color:var(--muted)}
+.proj-content{max-width:1400px;margin:0 auto;padding:6rem 4vw}
+.proj-intro{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);line-height:1.5;color:var(--text);margin-bottom:5rem;font-style:italic;max-width:900px}
+.section-row{display:grid;grid-template-columns:280px 1fr;gap:6rem;margin-bottom:6rem}
+.row-label{font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);padding-top:0.4rem}
+.row-body h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:1.5rem}
+.row-body p{font-size:1rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;font-weight:300}
+.row-body ul{list-style:none;padding:0}
+.row-body ul li{padding:0.7rem 0;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.95rem;display:flex;align-items:flex-start;gap:1rem}
+.row-body ul li::before{content:'—';color:var(--accent);flex-shrink:0}
+.img-full{
+  width:100%;
+  object-fit:contain;
+  background:#111;
+  margin-bottom:2rem;
+}
+.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+.img-grid-2 img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:contain;
+  background:#111;
+}
+.img-caption{font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);margin-top:0.75rem;text-transform:uppercase}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.tech-item{padding:1.5rem;border:1px solid var(--border);background:var(--card)}
+.tech-item h4{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+.tech-item p{font-size:0.85rem;color:var(--muted);line-height:1.7}
+.outcome-box{background:var(--bg2);border:1px solid var(--border);padding:4rem;margin:5rem 0;position:relative;overflow:hidden}
+.outcome-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.outcome-box p{font-size:1rem;line-height:1.9;color:var(--muted);font-weight:300}
+.proj-nav{border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;padding:4rem 4vw;max-width:1400px;margin:0 auto;gap:3rem}
+.proj-nav-link{text-decoration:none;padding:2rem;border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden}
+.proj-nav-link::before{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity 0.3s}
+.proj-nav-link:hover{border-color:var(--accent)}
+.proj-nav-link:hover::before{opacity:0.05}
+.proj-nav-link span{display:block;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;position:relative;z-index:1}
+.proj-nav-link strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;color:var(--text);position:relative;z-index:1}
+.pn-next{text-align:right}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s,transform 0.8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.section-row{grid-template-columns:1fr}.img-grid-2{grid-template-columns:1fr}.tech-grid{grid-template-columns:1fr 1fr}.proj-nav{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a class="nav-logo" href="index.html">AM.</a>
+  <a class="back-btn" href="index.html"><span>←</span><span>All Work</span></a>
+</nav>
+
+<div class="proj-hero">
+  <img class="proj-hero-bg" src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=1800&q=80" alt="Revive">
+  <div class="proj-hero-grad"></div>
+  <div class="proj-hero-content">
+    <div class="proj-category">02 — Medical Product Design</div>
+    <div class="proj-title">REVIVE</div>
+    <div class="proj-meta">
+      <div class="proj-meta-item"><label>Type</label><span>Group Project — New Product Development</span></div>
+      <div class="proj-meta-item"><label>Role</label><span>Research · Concept Development · User Testing</span></div>
+      <div class="proj-meta-item"><label>Domain</label><span>Medical Product Design</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-content">
+  <p class="proj-intro reveal">
+    "A trolley-based active cooling system designed to improve organ preservation during medical transport — bridging the gap between ice boxes and expensive perfusion systems."
+  </p>
+
+  <div class="section-row reveal">
+    <div class="row-label">Why It Matters</div>
+    <div class="row-body">
+      <h3>THE PROBLEM</h3>
+      <p>Organ transportation in India still relies on traditional ice boxes that provide unstable temperature regulation with no real-time monitoring, creating high risk of organ damage during transit. Advanced perfusion systems offer superior preservation but remain largely inaccessible due to extremely high costs. Affordability remains the primary barrier to adoption.</p>
+      <ul>
+        <li>Traditional ice boxes — unstable temperature regulation, no monitoring</li>
+        <li>Advanced perfusion machines — cost prohibitive for most hospitals</li>
+        <li>Need: A reliable middle ground viable for Indian healthcare context</li>
+        <li>Every minute matters — organ viability windows are narrow and unforgiving</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="img-grid-2 reveal">
+    <div>
+      <img src="revive/existingmethod1.png" alt="Existing Method 1">
+      <p class="img-caption">Existing ice-box method — current standard in India</p>
+    </div>
+    <div>
+      <img src="revive/existingmethod2.png" alt="Existing Method 2">
+      <p class="img-caption">Hospital transport context and workflow</p>
+    </div>
+  </div>
+
+  <div class="section-row reveal">
+    <div class="row-label">Concept Exploration</div>
+    <div class="row-body">
+      <h3>DESIGN EXPLORATION</h3>
+      <p>Design explored mobility, cooling integration, and medical usability through multiple trolley configurations focusing on stability, portability, and structural integration. Multiple concept directions were explored — from automobile-inspired forms to hexagonal stackable units.</p>
+      <ul>
+        <li>Trolley concept — highly complex integrated chiller system, bulky vertical form</li>
+        <li>Hexagon concept — best balance of logistical feasibility and scalable manufacturing</li>
+        <li>Form language guided by medical usability over aesthetics</li>
+        <li>Extendable handle bar and central wheels for easy transport</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <img class="img-full" style="aspect-ratio:16/7" src="revive/conceptsketches.png" alt="Concept sketches">
+    <p class="img-caption">Concept exploration — multiple trolley configurations and form studies</p>
+  </div>
+
+  <div class="section-row reveal">
+    <div class="row-label">System Architecture</div>
+    <div class="row-body">
+      <h3>TECHNICAL SYSTEM</h3>
+      <p>The system integrates multiple technologies to create a comprehensive organ preservation solution. Arduino serves as the central brain, coordinating all sensors and systems in real-time.</p>
+    </div>
+  </div>
+
+  <div class="tech-grid reveal">
+    <div class="tech-item">
+      <h4>Thermal Control</h4>
+      <p>Active chiller maintaining 2–8°C. Phase-changing material gel packs + Vacuum Insulation Panels + Polyisocyanurate foam for thermal buffering.</p>
+    </div>
+    <div class="tech-item">
+      <h4>Sensing & Monitoring</h4>
+      <p>Temperature & humidity sensors with real-time LED display of battery and sensor readings. Continuous organ safety monitoring.</p>
+    </div>
+    <div class="tech-item">
+      <h4>Stability System</h4>
+      <p>Gyroscope system for tilt detection and shock absorption. Reduces physical stress on the organ during transit across rough terrain.</p>
+    </div>
+    <div class="tech-item">
+      <h4>Power System</h4>
+      <p>12V battery backup system with AC/DC Power Supply Unit. DC UPS/Charge Controller ensures uninterrupted operation.</p>
+    </div>
+    <div class="tech-item">
+      <h4>Control Brain</h4>
+      <p>Arduino microcontroller as central processing unit. Compressor Drive Board controls the RIGID Micro 12V DC Compressor (260×260×220mm).</p>
+    </div>
+    <div class="tech-item">
+      <h4>Mobility</h4>
+      <p>Integrated wheels for easy transport. Ergonomic handle design for one-handed operation. Designed for hospital corridor and ambulance use.</p>
+    </div>
+  </div>
+
+  <div class="img-grid-2 reveal">
+  <div>
+    <img src="revive/finaldesign.png" alt="Final Design">
+    <p class="img-caption">Final design — REVIVE Smart Organ Transportation Unit</p>
+  </div>
+  <div>
+    <img src="revive/systemarchitecture.png" alt="System Architecture">
+    <p class="img-caption">System architecture — integrated cooling & monitoring system</p>
+  </div>
+</div>
+
+  <div class="outcome-box reveal">
+    <p>The final design is a trolley-based smart organ transport unit developed as a reliable alternative to conventional ice boxes. The system integrates an active cooling mechanism maintaining a stable 2–8°C environment, supported by PCM-based insulation for thermal buffering and real-time temperature monitoring. Gyroscopic stabilization enhances handling and orientation, reducing physical stress on the organ. Positioned as an accessible bridge between traditional ice storage and costly perfusion systems, the design improves preservation reliability, minimizes transit risks, and supports safer organ transportation within resource-constrained healthcare environments.</p>
+  </div>
+</div>
+
+<div class="proj-nav">
+  <a class="proj-nav-link" href="project-sahyog.html">
+    <span>← Previous</span>
+    <strong>SAHYOG</strong>
+  </a>
+  <a class="proj-nav-link pn-next" href="project-echowear.html">
+    <span>Next Project →</span>
+    <strong>ECHOWEAR</strong>
+  </a>
+</div>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px'})
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-20)+'px';ring.style.top=(ry-20)+'px';requestAnimationFrame(animRing)}
+animRing()
+const obs=new IntersectionObserver(e=>{e.forEach(r=>{if(r.isIntersecting)r.target.classList.add('visible')})},{threshold:0.1})
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r))
+</script>
+</body>
+</html>

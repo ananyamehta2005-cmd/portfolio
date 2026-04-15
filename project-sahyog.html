@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahyog — Ananya Mehta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a08;--bg2:#111110;--bg3:#1a1a17;--accent:#C0392B;--accent2:#E8472C;--text:#f0ede8;--muted:#888880;--border:#2a2a26;--card:#141412}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.1s ease;mix-blend-mode:difference}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 4vw;display:flex;justify-content:space-between;align-items:center}
+nav::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,8,0.95),transparent);pointer-events:none;z-index:-1}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:var(--text);text-decoration:none}
+.back-btn{display:flex;align-items:center;gap:0.75rem;color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s}
+.back-btn:hover{color:var(--accent)}
+.back-arrow{font-size:1.2rem}
+
+/* HERO */
+.proj-hero{height:90vh;position:relative;display:flex;align-items:flex-end;padding:6rem 4vw 4rem;overflow:hidden}
+.proj-hero-bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;filter:brightness(0.4)}
+.proj-hero-grad{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 20%,rgba(10,10,8,0.5) 60%,transparent 100%)}
+.proj-hero-content{position:relative;z-index:1;max-width:1400px;width:100%;margin:0 auto}
+.proj-category{font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,14rem);line-height:0.9;letter-spacing:0.02em;color:var(--text);margin-bottom:2rem}
+.proj-meta{display:flex;gap:4rem;flex-wrap:wrap}
+.proj-meta-item label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:0.4rem}
+.proj-meta-item span{font-size:0.9rem;color:var(--muted)}
+
+/* CONTENT */
+.proj-content{max-width:1400px;margin:0 auto;padding:6rem 4vw}
+.proj-intro{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);line-height:1.5;color:var(--text);margin-bottom:5rem;font-style:italic;max-width:900px}
+.section-row{display:grid;grid-template-columns:280px 1fr;gap:6rem;margin-bottom:6rem}
+.section-row.reverse{grid-template-columns:1fr 280px}
+.row-label{font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);padding-top:0.4rem}
+.row-body h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:1.5rem}
+.row-body p{font-size:1rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;font-weight:300}
+.row-body ul{list-style:none;padding:0}
+.row-body ul li{padding:0.7rem 0;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.95rem;display:flex;align-items:flex-start;gap:1rem}
+.row-body ul li::before{content:'—';color:var(--accent);flex-shrink:0}
+
+/* IMAGES */
+.img-full{
+  width:100%;
+  aspect-ratio:16/7;
+  object-fit:contain;
+  background:#111;
+  padding:20px;
+  margin-bottom:2rem;
+}
+.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+.img-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem}
+.img-grid-2 img,.img-grid-3 img,.img-full{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  background:#111;
+  padding:10px;
+}
+.img-grid-2 img{aspect-ratio:4/3}
+.img-grid-3 img{aspect-ratio:3/4}
+.img-caption{font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);margin-top:0.75rem;text-transform:uppercase}
+
+/* OUTCOME */
+.outcome-box{background:var(--bg2);border:1px solid var(--border);padding:4rem;margin:5rem 0;position:relative;overflow:hidden}
+.outcome-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.outcome-box blockquote{font-family:'DM Serif Display',serif;font-size:clamp(1.2rem,2vw,1.8rem);line-height:1.6;color:var(--text);font-style:italic;margin-bottom:2rem}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+.impact-item{text-align:center;padding:2rem;border:1px solid var(--border)}
+.impact-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--accent);display:block}
+.impact-label{font-size:0.8rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.5rem}
+
+/* NAV PROJECTS */
+.proj-nav{border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;padding:4rem 4vw;max-width:1400px;margin:0 auto;gap:3rem}
+.proj-nav-link{text-decoration:none;padding:2rem;border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden}
+.proj-nav-link::before{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity 0.3s}
+.proj-nav-link:hover{border-color:var(--accent)}
+.proj-nav-link:hover::before{opacity:0.05}
+.proj-nav-link span{display:block;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;position:relative;z-index:1}
+.proj-nav-link strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;color:var(--text);position:relative;z-index:1}
+.pn-next{text-align:right}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){.section-row,.section-row.reverse{grid-template-columns:1fr}.img-grid-2,.img-grid-3{grid-template-columns:1fr}.impact-grid{grid-template-columns:1fr 1fr}.proj-nav{grid-template-columns:1fr}}
+@media(max-width:600px){.proj-meta{gap:2rem}.outcome-box{padding:2rem}.proj-content{padding:4rem 5vw}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">AM.</a>
+  <a class="back-btn" href="index.html"><span class="back-arrow">←</span><span>All Work</span></a>
+</nav>
+
+<!-- HERO -->
+<div class="proj-hero">
+  <img class="proj-hero-bg" src="sahayog/herosahayog.jpg">
+  <div class="proj-hero-grad"></div>
+  <div class="proj-hero-content">
+    <div class="proj-category">01 — Service Design & Research</div>
+    <div class="proj-title">SAHYOG</div>
+    <div class="proj-meta">
+      <div class="proj-meta-item"><label>Type</label><span>Group Project</span></div>
+      <div class="proj-meta-item"><label>Role</label><span>Research · System Design · Interface Concept</span></div>
+      <div class="proj-meta-item"><label>Domain</label><span>Service Design & Research</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="proj-content">
+  <p class="proj-intro reveal">
+    "A phygital cooperative model designed to improve financial access, vendor reliability, and business stability through collective trust and digital transparency."
+  </p>
+
+  <!-- CHALLENGE -->
+  <div class="section-row reveal">
+    <div class="row-label">The Challenge</div>
+    <div class="row-body">
+      <h3>THE PROBLEM SPACE</h3>
+      <p>Women home-entrepreneurs often rely on informal financial systems and unverified artisan networks. The challenge was to identify where existing support structures were failing and design a system that could bridge the gap.</p>
+      <ul>
+        <li>No access to small emergency funds</li>
+        <li>Trust-based and risky lending with no formal structure</li>
+        <li>Unreliable production partners and artisan networks</li>
+        <li>Lack of financial credibility for formal banking</li>
+        <li>Limited bargaining power as individual entrepreneurs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- IMAGE 1 -->
+  <div class="reveal">
+    <img class="img-full" src="sahayog/researchcontext.png">
+    <p class="img-caption">Research context — women entrepreneurship ecosystems in India</p>
+  </div>
+
+  <!-- KEY INSIGHTS -->
+  <div class="section-row reveal">
+    <div class="row-label">Key Insights</div>
+    <div class="row-body">
+      <h3>RESEARCH FINDINGS</h3>
+      <p>Research revealed that existing community practices already contain strong trust structures — the design opportunity was to formalize trust without disrupting cultural behavior.</p>
+      <ul>
+        <li>Rotating savings systems (chit funds) are culturally familiar and already trusted</li>
+        <li>Collective contribution reduces individual financial risk significantly</li>
+        <li>Trust exists socially but lacks formal documentation and structure</li>
+        <li>Transparency builds long-term credibility across the community</li>
+        <li>Digitization alone doesn't fix human inconsistency in supply chains</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- IMAGE GRID -->
+  <div class="img-grid-2 reveal">
+  <div>
+    <img src="sahayog/researchinsights1.png">
+    <p class="img-caption">Insight clustering and mapping</p>
+  </div>
+  <div>
+    <img src="sahayog/researchinsights2.png">
+    <p class="img-caption">Theme → Question → Answer framework</p>
+  </div>
+</div>
+
+  <!-- DESIGN DIRECTION -->
+  <div class="section-row reveal">
+    <div class="row-label">Design Direction</div>
+    <div class="row-body">
+      <h3>THE SOLUTION: SAHYOG ECOSYSTEM</h3>
+      <p>Sahyog transforms informal savings networks into a structured cooperative ecosystem. The system combines digital transparency with the familiar cultural practice of collective savings, creating stability through collective accountability.</p>
+      <ul>
+        <li>Shared financial pool with rotating payouts and emergency fund access</li>
+        <li>Digital transaction logging creating formal financial history</li>
+        <li>Verified artisan network with credibility ratings</li>
+        <li>Milestone-based payments for production partners</li>
+        <li>Government ID validation + community trust verification</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- IMAGE - ECOSYSTEM -->
+  <div class="reveal">
+    <img class="img-full" src="sahayog/sahayogecosystem.png">
+    <p class="img-caption">Sahyog's cooperative ecosystem — benefits across all stakeholder groups</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-row reveal">
+    <div class="row-label">How It Works</div>
+    <div class="row-body">
+      <h3>COOPERATIVE WORKFLOW</h3>
+      <p>The system operates through a clear 4-stage cooperative lifecycle, ensuring every participant has defined responsibilities and benefits at each stage.</p>
+      <ul>
+        <li><strong style="color:var(--text)">Registration & Orientation</strong> — User downloads app, verifies identity, joins group, learns rules</li>
+        <li><strong style="color:var(--text)">Regular Financial Contributions</strong> — Fixed amounts tracked digitally, auto-debit option</li>
+        <li><strong style="color:var(--text)">Pooled Funds Distribution</strong> — One member receives pooled funds each cycle with priority requests</li>
+        <li><strong style="color:var(--text)">Marketplace Engagement</strong> — Members browse verified artisans, escrow for secure transactions</li>
+        <li><strong style="color:var(--text)">Credibility Building</strong> — App tracks contributions, payments, disputes to assign credibility points</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- APP SCREENS -->
+  <div class="img-grid-3 reveal">
+  <div>
+    <img src="sahayog/home.png">
+    <p class="img-caption">Home — Welcome to Sahyog</p>
+  </div>
+  <div>
+    <img src="sahayog/dashboard.png">
+    <p class="img-caption">Dashboard — Activity & artisan network</p>
+  </div>
+  <div>
+    <img src="sahayog/priorityaccess.png">
+    <p class="img-caption">Priority access — emergency fund request</p>
+  </div>
+</div>
+
+  <!-- IDEATION -->
+  <div class="section-row reveal">
+    <div class="row-label">Ideation</div>
+    <div class="row-body">
+      <h3>INTERFACE DESIGN</h3>
+      <p>Designed for simplicity and trust — mobile-first, low-learning interface. The design prioritized familiarity and cultural resonance over novelty, ensuring even users with limited tech literacy could navigate confidently.</p>
+      <ul>
+        <li>Contribution tracking with visual progress indicators</li>
+        <li>Emergency fund request system with transparency</li>
+        <li>Artisan credibility profiles with portfolio and ratings</li>
+        <li>Transparent financial history — community-visible logs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="outcome-box reveal">
+    <blockquote>"A cooperative financial ecosystem that strengthens trust, improves vendor reliability, and enables sustainable business growth without requiring collateral."</blockquote>
+    <div class="impact-grid">
+      <div class="impact-item">
+        <span class="impact-num">↓</span>
+        <div class="impact-label">Reduced Financial Vulnerability</div>
+      </div>
+      <div class="impact-item">
+        <span class="impact-num">↑</span>
+        <div class="impact-label">Increased Operational Stability</div>
+      </div>
+      <div class="impact-item">
+        <span class="impact-num">↑</span>
+        <div class="impact-label">Improved Bargaining Power</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT NAV -->
+<div class="proj-nav">
+  <a class="proj-nav-link" href="index.html">
+    <span>← Back to</span>
+    <strong>ALL PROJECTS</strong>
+  </a>
+  <a class="proj-nav-link pn-next" href="project-revive.html">
+    <span>Next Project →</span>
+    <strong>REVIVE</strong>
+  </a>
+</div>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px'})
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-20)+'px';ring.style.top=(ry-20)+'px';requestAnimationFrame(animRing)}
+animRing()
+const obs=new IntersectionObserver(e=>{e.forEach(r=>{if(r.isIntersecting)r.target.classList.add('visible')})},{threshold:0.1})
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r))
+</script>
+</body>
+</html>

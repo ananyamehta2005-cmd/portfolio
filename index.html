@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ananya Mehta — Industrial Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a08;
+  --bg2:#111110;
+  --bg3:#1a1a17;
+  --accent:#C0392B;
+  --accent2:#E8472C;
+  --text:#f0ede8;
+  --muted:#888880;
+  --border:#2a2a26;
+  --card:#141412;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+
+/* CUSTOM CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.15s ease;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.1s ease;mix-blend-mode:difference}
+.cursor.hover{transform:scale(3)}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9997;display:none;align-items:center;justify-content:center;transition:opacity 0.8s ease}
+#loader.hide{opacity:0;pointer-events:none}
+.loader-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,10vw,8rem);color:var(--accent);letter-spacing:0.1em;animation:pulse 1.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 4vw;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:normal}
+nav::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,8,0.9),transparent);pointer-events:none;z-index:-1}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.3s;font-weight:300}
+.nav-links a:hover{color:var(--accent)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:1px;background:var(--text);transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:3rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--text);text-decoration:none;letter-spacing:0.1em;transition:color 0.3s}
+.mobile-menu a:hover{color:var(--accent)}
+
+/* HERO */
+#hero{height:100vh;display:grid;place-items:center;position:relative;padding:0 4vw;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(192,57,43,0.08) 0%,transparent 60%)}
+.hero-noise{position:absolute;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
+.hero-content{position:relative;
+  z-index:1;
+  max-width:900px;
+  width:100%;
+  padding:80px 60px;
+  transition:all 0.5s ease;}
+.hero-tag{font-size:0.8rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:#888;
+  margin-bottom:1.5rem;
+  opacity:1;}
+h1.hero-title{font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,12vw,12rem);
+  line-height:0.95;
+  letter-spacing:0.02em;
+  color:var(--text);
+  opacity:1;}
+h1.hero-title span{display:block}
+h1.hero-title .accent{color:var(--accent)}
+.hero-desc{margin-top:2rem;
+  margin-bottom:80px;
+  max-width:480px;
+  font-size:1rem;
+  line-height:1.6;
+  color:var(--muted);
+  font-weight:300;
+  opacity:1;;
+  max-width:480px;
+  font-size:1rem;
+  line-height:1.6;
+  color:var(--muted);
+  font-weight:300;
+  opacity:1;}
+.hero-desc em{color:var(--text);font-style:normal}
+.hero-scroll{display:none;}
+.hero-scroll span{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-year{position:absolute;right:4vw;bottom:3rem;font-size:0.75rem;letter-spacing:0.2em;color:var(--muted);writing-mode:vertical-rl;opacity:0;animation:fadeUp 1s 1.2s forwards}
+#hero.fadeOut .hero-content{
+  opacity:0;
+  transform:translateY(-60px);
+  transition:all 0.5s ease;
+}
+/* MARQUEE */
+.marquee-section{margin-top:120px;
+  padding:2rem 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;}
+.marquee-track{display:flex;gap:4rem;animation:marquee 20s linear infinite;white-space:nowrap}
+.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.1em;color:var(--muted);display:flex;align-items:center;gap:1rem}
+.marquee-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION COMMON */
+section{padding:8rem 4vw}
+.section-label{font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,6rem);line-height:1;letter-spacing:0.02em;color:var(--text);margin-bottom:4rem}
+
+/* ABOUT */
+#about{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;max-width:1400px;margin:0 auto}
+.about-left{}
+.about-photo-wrapper{position:relative}
+.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(20%);transition:filter 0.5s}
+.about-photo:hover{filter:grayscale(0%)}
+.about-photo-frame{position:absolute;inset:-12px;border:1px solid var(--accent);opacity:0.3;pointer-events:none;transition:opacity 0.5s}
+.about-photo-wrapper:hover .about-photo-frame{opacity:0.7}
+.about-photo-label{position:absolute;bottom:1.5rem;left:1.5rem;background:var(--accent);color:white;padding:0.4rem 1rem;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase}
+.about-right{}
+.about-bio{font-size:1.15rem;line-height:1.9;color:var(--muted);margin-bottom:3rem;font-weight:300}
+.about-bio strong{color:var(--text);font-weight:400}
+.attrs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.attr-item{padding:1.2rem 1.5rem;border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color 0.3s}
+.attr-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform 0.3s}
+.attr-item:hover{border-color:var(--accent)}
+.attr-item:hover::before{transform:scaleY(1)}
+.attr-num{font-family:'Bebas Neue',sans-serif;font-size:0.7rem;letter-spacing:0.3em;color:var(--accent);margin-bottom:0.4rem}
+.attr-text{font-size:0.85rem;color:var(--text);line-height:1.4}
+
+/* TIMELINE */
+.timeline-section{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.timeline-col{}
+.timeline-col h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.1em;color:var(--accent);margin-bottom:2.5rem}
+.timeline-item{padding:1.5rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.5rem;align-items:flex-start}
+.t-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;margin-top:0.35rem;flex-shrink:0}
+.t-content{}
+.t-title{font-size:0.95rem;font-weight:500;color:var(--text);margin-bottom:0.25rem}
+.t-place{font-size:0.85rem;color:var(--muted)}
+.t-year{font-size:0.75rem;letter-spacing:0.15em;color:var(--accent);margin-top:0.25rem}
+
+/* TOOLS */
+.tools-section{max-width:1400px;margin:0 auto}
+.tools-grid{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:0}
+.tool-card{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;border:1px solid var(--border);background:var(--card);transition:all 0.3s;position:relative;overflow:hidden}
+.tool-card::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity 0.3s}
+.tool-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.tool-card:hover::after{opacity:0.05}
+.tool-icon{width:36px;height:36px;object-fit:contain;flex-shrink:0;position:relative;z-index:1}
+.tool-name{font-size:0.85rem;letter-spacing:0.05em;color:var(--text);position:relative;z-index:1}
+
+/* PROJECTS */
+#work{max-width:1400px;margin:0 auto}
+.projects-grid{display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:30px;}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-decoration: none;
+}
+.project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+}
+.project-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    background: #111;
+    border-radius: 12px;
+}
+  transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s;}
+.project-card:hover .project-img{transform:scale(1.06);filter:brightness(0.7)}
+.project-card:hover .project-info{transform:translateY(0)}
+.project-num{font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:0.3em;color:var(--accent);margin-bottom:0.5rem}
+.project-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:0.05em;color:var(--text);line-height:1.1;margin-bottom:0.5rem}
+.project-type{font-size:0.8rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+.project-card:hover .project-arrow{opacity:1;transform:scale(1)}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.project-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    background: #111;
+    border-radius: 12px;
+}
+.project-content {
+    padding: 0;
+}
+.project-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    background: #111;
+    border-radius: 12px;
+}
+.project-type {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+.project-name {
+  font-size: 1.4rem;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+/* CONTACT */
+#contact{max-width:1400px;margin:0 auto;text-align:center}
+.contact-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,14rem);line-height:0.9;letter-spacing:-0.01em;color:var(--text);margin-bottom:4rem;position:relative}
+.contact-big::after{content:'';position:absolute;inset:0;color:transparent;-webkit-text-stroke:1px var(--border);font-family:'Bebas Neue',sans-serif;font-size:inherit;line-height:inherit;pointer-events:none;transform:translateY(6px)}
+.contact-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.contact-link{display:flex;align-items:center;gap:0.75rem;padding:1.2rem 2.5rem;border:1px solid var(--border);text-decoration:none;color:var(--text);font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.3s;position:relative;overflow:hidden}
+.contact-link::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-100%);transition:transform 0.3s ease}
+.contact-link:hover::before{transform:translateX(0)}
+.contact-link span{position:relative;z-index:1}
+.contact-icon{position:relative;z-index:1;font-size:1.1rem}
+
+/* FOOTER */
+footer{padding:3rem 4vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;max-width:100%}
+footer p{font-size:0.8rem;color:var(--muted);letter-spacing:0.1em}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.15s}
+.reveal-delay-2{transition-delay:0.3s}
+.reveal-delay-3{transition-delay:0.45s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  #about{grid-template-columns:1fr;gap:3rem}
+  .about-photo{aspect-ratio:1/1}
+  .timeline-section{grid-template-columns:1fr}
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    align-items: start;
+}
+  .project-card{
+    border: none !important;
+}
+  
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .contact-big{font-size:clamp(3rem,15vw,6rem)}
+}
+@media(max-width:600px){
+  section{padding:5rem 5vw}
+  .attrs-grid{grid-template-columns:1fr}
+  .contact-links{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div id="loader">
+  <div class="loader-text">BUILDING WITH INTENT</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">AM.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mm-link">About</a>
+  <a href="#work" class="mm-link">Work</a>
+  <a href="#contact" class="mm-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Industrial Product Designer · Mumbai · 2026</p>
+    <h1 class="hero-title">
+      <span>BUILDING</span>
+      <span>WITH</span>
+      <span class="accent">INTENT.</span>
+    </h1>
+    <p class="hero-desc">
+  Hey there! I'm <em>Ananya</em>, welcome to my portfolio — <em>nothing here is placed without a reason.</em>
+</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+  <div class="hero-year">© 2026</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item"><span class="marquee-dot"></span>Service Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Medical Product Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Luxury Product Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Form Exploration</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Research & Strategy</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>User Experience</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Concept Development</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Atlas Skilltech ISDI Mumbai</div>
+    <!-- duplicate -->
+    <div class="marquee-item"><span class="marquee-dot"></span>Service Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Medical Product Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Luxury Product Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Form Exploration</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Research & Strategy</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>User Experience</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Concept Development</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Atlas Skilltech ISDI Mumbai</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section>
+  <div id="about">
+    <div class="about-left reveal">
+      <div class="about-photo-wrapper">
+       <img class="about-photo" src="file:///C:/Users/anany/Downloads/files/images/about.jpeg" alt="Ananya Mehta">
+        <div class="about-photo-frame"></div>
+        <div class="about-photo-label">Ananya Mehta</div>
+      </div>
+    </div>
+    <div class="about-right">
+      <p class="section-label reveal">About Me</p>
+      <h2 class="section-title reveal">INDUSTRIAL<br>PRODUCT<br><span style="color:var(--accent)">DESIGNER.</span></h2>
+      <p class="about-bio reveal reveal-delay-1">
+        Hey! I'm Ananya, a <strong>junior-year product design student</strong> who approaches problems with clarity and intent. I genuinely enjoy turning ideas into tangible outcomes and thinking through how each decision shapes the final result.
+        <br><br>
+        I naturally take <strong>ownership of projects</strong>, making sure things move forward smoothly and are carried through properly. I'm always open to exploring new directions, learning continuously, and taking on challenges that expand my perspective.
+      </p>
+      <div class="attrs-grid reveal reveal-delay-2">
+        <div class="attr-item">
+          <div class="attr-num">01</div>
+          <div class="attr-text">Problem framing through perspective</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-num">02</div>
+          <div class="attr-text">Detail-led form exploration</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-num">03</div>
+          <div class="attr-text">Structured execution</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-num">04</div>
+          <div class="attr-text">Research-backed decisions</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-num">05</div>
+          <div class="attr-text">Persuasive communication</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-num">06</div>
+          <div class="attr-text">Responsible leadership</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & EXPERIENCE -->
+<section style="background:var(--bg2);padding-top:6rem;padding-bottom:6rem">
+  <div class="timeline-section">
+    <div class="timeline-col reveal">
+      <p class="section-label">Education</p>
+      <h3>STUDIED.</h3>
+      <div class="timeline-item">
+        <div class="t-dot"></div>
+        <div class="t-content">
+          <div class="t-title">Bachelor of Design — Product Design</div>
+          <div class="t-place">Atlas Skilltech University (ISDI Mumbai)</div>
+          <div class="t-year">2023 — 2027</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-dot"></div>
+        <div class="t-content">
+          <div class="t-title">Higher Secondary Schooling</div>
+          <div class="t-place">Delhi Public School, Jodhpur</div>
+          <div class="t-year">2021 — 2023</div>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-col reveal reveal-delay-1">
+      <p class="section-label">Experience</p>
+      <h3>WORKED.</h3>
+      <div class="timeline-item">
+        <div class="t-dot"></div>
+        <div class="t-content">
+          <div class="t-title">Product Design Intern</div>
+          <div class="t-place">Marcus Wolff Designs, Jodhpur</div>
+          <div class="t-year">2025</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-dot"></div>
+        <div class="t-content">
+          <div class="t-title">Design Intern</div>
+          <div class="t-place">Attitudes, Jaipur</div>
+          <div class="t-year">2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section>
+  <div class="tools-section">
+    <p class="section-label reveal">Tool Set</p>
+    <h2 class="section-title reveal">SOFTWARE<br>& TOOLS.</h2>
+    <div class="tools-grid">
+      <div class="tool-card reveal">
+        <img src="images/photoshop.png" class="tool-icon" alt="Adobe Photoshop">
+        <span class="tool-name">Adobe Photoshop</span>
+      </div>
+      <div class="tool-card reveal reveal-delay-1">
+        <img src="images/illustrator.png" class="tool-icon" alt="Adobe Illustrator">
+        <span class="tool-name">Adobe Illustrator</span>
+      </div>
+      <div class="tool-card reveal reveal-delay-2">
+        <img src="images/indesign.png" class="tool-icon" alt="Adobe InDesign">
+        <span class="tool-name">Adobe InDesign</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="images/fusion360.png" class="tool-icon" alt="Fusion 360"> 
+          <span class="tool-name">Fusion 360</span>
+      </div>
+      <div class="tool-card reveal reveal-delay-1">
+        <img src="images/figma.png" class="tool-icon" alt="Figma">
+        <span class="tool-name">Figma</span>
+      </div>
+      <div class="tool-card reveal reveal-delay-2">
+        <img src="images/msoffice.jpg" class="tool-icon" alt="Microsoft Office">
+        <span class="tool-name">Microsoft Office</span>
+      </div>
+      
+</section>
+
+<!-- WORK -->
+<section id="work" style="background:var(--bg2)">
+  <div style="max-width:1400px;margin:0 auto">
+    <p class="section-label reveal">Selected Work</p>
+    <h2 class="section-title reveal">PROJECTS.</h2>
+
+    <div class="projects-grid reveal">
+
+      <!-- 01 SAHYOG - FEATURED -->
+      <a href="project-sahyog.html" class="project-card featured">
+       <img class="project-img" src="images/sahayogcover2.png" alt="Sahayog Project"> 
+        <div class="project-content">
+    <div class="project-num">01</div>
+    <div class="project-type">Service Design & Research</div>
+    <div class="project-name">SAHYOG</div>
+  </div>
+
+</a>
+
+      <!-- 02 REVIVE -->
+      <a href="project-revive.html" class="project-card">
+        <img class="project-img" src="images/revivecover.png" alt="Revive Project"> 
+        <div class="project-content">
+    <div class="project-num">02</div>
+    <div class="project-type">Medical Product Design</div>
+    <div class="project-name">REVIVE</div>
+  </div>
+
+</a>
+
+      <!-- 03 ECHOWEAR -->
+      <a href="project-echowear.html" class="project-card">
+       <img class="project-img" src="images/echowear.png" alt="EchoWear Project"> 
+        <div class="project-content">
+    <div class="project-num">03</div>
+    <div class="project-type">Medical Product Design</div>
+    <div class="project-name">ECHOWEAR</div>
+  </div>
+
+</a>
+
+      <!-- 04 SHAZE -->
+      <a href="project-shaze.html" class="project-card">
+       <img class="project-img" src="images/shazecover.png" alt="Shaze Project"> 
+        <div class="project-content">
+    <div class="project-num">04</div>
+    <div class="project-type">Luxury Product Design</div>
+    <div class="project-name">SHAZE</div>
+  </div>
+
+</a>
+
+      <!-- 05 LEOPARD -->
+      <a href="project-leopard.html" class="project-card">
+        <img class="project-img" src="images/leopardcover.png" alt="Leopard Form Study"> 
+        <div class="project-content">
+    <div class="project-num">05</div>
+    <div class="project-type">Form Exploration</div>
+    <div class="project-name">LEOPARD</div>
+  </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="text-align:center">
+    <p class="section-label reveal" style="margin-bottom:2rem">Get In Touch</p>
+    <div class="contact-big reveal">LET'S CONNECT<br></div>
+    <p style="font-size:1rem;color:var(--muted);margin-bottom:3rem;font-weight:300" class="reveal reveal-delay-1">
+      Open to internships, collaborations & exciting design challenges.
+    </p>
+    <div class="contact-links reveal reveal-delay-2">
+      <a class="contact-link" href="mailto:ananyamehta2005@gmail.com">
+        <span class="contact-icon">✉</span>
+        <span>ananyamehta2005@gmail.com</span>
+      </a>
+      <a class="contact-link" href="tel:+919461130838">
+        <span class="contact-icon">✆</span>
+        <span>+91 94611 30838</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Ananya Mehta — Industrial Product Designer</p>
+  <p style="color:var(--accent)">BUILDING WITH INTENT.</p>
+</footer>
+
+<script>
+// Loader
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loader').classList.add('hide')},1500)
+})
+
+// Custom cursor
+const cursor=document.getElementById('cursor')
+const ring=document.getElementById('cursorRing')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY
+  cursor.style.left=(mx-5)+'px'
+  cursor.style.top=(my-5)+'px'
+})
+function animRing(){
+  rx+=(mx-rx)*0.12
+  ry+=(my-ry)*0.12
+  ring.style.left=(rx-20)+'px'
+  ring.style.top=(ry-20)+'px'
+  requestAnimationFrame(animRing)
+}
+animRing()
+document.querySelectorAll('a,button,.tool-card,.attr-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cursor.classList.add('hover'))
+  el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'))
+})
+
+// Hamburger
+const ham=document.getElementById('hamburger')
+const menu=document.getElementById('mobileMenu')
+ham.addEventListener('click',()=>menu.classList.toggle('open'))
+document.querySelectorAll('.mm-link').forEach(l=>l.addEventListener('click',()=>menu.classList.remove('open')))
+
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal')
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:0.1})
+reveals.forEach(r=>obs.observe(r))
+
+// Parallax hero
+window.addEventListener('scroll',()=>{
+  const s = window.scrollY
+
+  const heroTitle = document.querySelector('.hero-title')
+  const hero = document.querySelector('#hero')
+
+  // existing parallax
+ if (s < 20 && heroTitle) {
+  heroTitle.style.transform = `translateY(${s * 0.3}px)`
+}
+
+  // ADD THIS ↓↓↓
+  if (s > 20) {
+    hero.classList.add("fadeOut")
+  } else {
+    hero.classList.remove("fadeOut")
+  }
+})
+</script>
+</body>
+</html>

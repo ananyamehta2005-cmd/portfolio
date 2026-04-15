@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echowear — Ananya Mehta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a08;--bg2:#111110;--accent:#C0392B;--text:#f0ede8;--muted:#888880;--border:#2a2a26;--card:#141412}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.1s;mix-blend-mode:difference}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 4vw;display:flex;justify-content:space-between;align-items:center}
+nav::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,8,0.95),transparent);pointer-events:none;z-index:-1}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:var(--text);text-decoration:none}
+.back-btn{display:flex;align-items:center;gap:0.75rem;color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s}
+.back-btn:hover{color:var(--accent)}
+.proj-hero{height:90vh;position:relative;display:flex;align-items:flex-end;padding:6rem 4vw 4rem;overflow:hidden}
+.proj-hero-bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;filter:brightness(0.3)}
+.proj-hero-grad{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 20%,rgba(10,10,8,0.4) 60%,transparent 100%)}
+.proj-hero-content{position:relative;z-index:1;max-width:1400px;width:100%;margin:0 auto}
+.proj-category{font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,12rem);line-height:0.9;color:var(--text);margin-bottom:2rem}
+.proj-meta{display:flex;gap:4rem;flex-wrap:wrap}
+.proj-meta-item label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:0.4rem}
+.proj-meta-item span{font-size:0.9rem;color:var(--muted)}
+.proj-content{max-width:1400px;margin:0 auto;padding:6rem 4vw}
+.proj-intro{font-family:'DM Serif Display',serif;font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.55;color:var(--text);margin-bottom:5rem;font-style:italic;max-width:900px}
+.section-row{display:grid;grid-template-columns:280px 1fr;gap:6rem;margin-bottom:6rem}
+.row-label{font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);padding-top:0.4rem}
+.row-body h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:1.5rem}
+.row-body p{font-size:1rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;font-weight:300}
+.row-body ul{list-style:none;padding:0}
+.row-body ul li{padding:0.7rem 0;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.95rem;display:flex;align-items:flex-start;gap:1rem}
+.row-body ul li::before{content:'—';color:var(--accent);flex-shrink:0}
+.img-full{
+  width:100%;
+  object-fit:contain;
+  background:#111;
+  margin-bottom:2rem;
+}
+.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+.img-grid-2 img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:contain;
+  background:#111;
+}
+.img-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem}
+.img-grid-4 img{
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:contain;
+  background:#111;
+}
+.img-caption{font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);margin-top:0.75rem;text-transform:uppercase}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.feature-item{padding:1.5rem;border:1px solid var(--border)}
+.feature-item h4{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+.feature-item p{font-size:0.85rem;color:var(--muted);line-height:1.7}
+.outcome-box{background:var(--bg2);border:1px solid var(--border);padding:4rem;margin:5rem 0;position:relative;overflow:hidden}
+.outcome-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.outcome-box p{font-size:1rem;line-height:1.9;color:var(--muted);font-weight:300}
+.proj-nav{border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;padding:4rem 4vw;max-width:1400px;margin:0 auto;gap:3rem}
+.proj-nav-link{text-decoration:none;padding:2rem;border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden}
+.proj-nav-link::before{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity 0.3s}
+.proj-nav-link:hover{border-color:var(--accent)}
+.proj-nav-link:hover::before{opacity:0.05}
+.proj-nav-link span{display:block;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;position:relative;z-index:1}
+.proj-nav-link strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;color:var(--text);position:relative;z-index:1}
+.pn-next{text-align:right}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s,transform 0.8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.section-row{grid-template-columns:1fr}.img-grid-2,.img-grid-4{grid-template-columns:1fr 1fr}.feature-grid{grid-template-columns:1fr 1fr}.proj-nav{grid-template-columns:1fr}}
+@media(max-width:600px){.img-grid-4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a class="nav-logo" href="index.html">AM.</a>
+  <a class="back-btn" href="index.html"><span>←</span><span>All Work</span></a>
+</nav>
+
+<div class="proj-hero">
+  <img class="proj-hero-bg" src="echowear/hero.png" alt="Echowear">
+  <div class="proj-hero-grad"></div>
+  <div class="proj-hero-content">
+    <div class="proj-category">03 — Medical Product Design</div>
+    <div class="proj-title">ECHOWEAR</div>
+    <div class="proj-meta">
+      <div class="proj-meta-item"><label>Type</label><span>Group Project</span></div>
+      <div class="proj-meta-item"><label>Role</label><span>Research · Concept Development · Form Design · Interaction Strategy</span></div>
+      <div class="proj-meta-item"><label>Domain</label><span>Medical Product Design</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-content">
+  <p class="proj-intro reveal">
+    "A wearable navigation system designed to enhance spatial awareness and independent mobility for visually impaired users through non-visual feedback and assistive sensing technologies."
+  </p>
+
+  <div class="section-row reveal">
+    <div class="row-label">Design Motive</div>
+    <div class="row-body">
+      <h3>THE PROBLEM</h3>
+      <p>Visually impaired individuals struggle with navigation especially in new or unfamiliar spaces. Existing aids offer poor real-time feedback and fail to provide true independence. Research identified critical gaps that current solutions fail to address.</p>
+      <ul>
+        <li>Low awareness and adoption of echolocation-based tools</li>
+        <li>Noise interference reducing effectiveness in urban environments</li>
+        <li>Sensory overload from feedback-heavy systems</li>
+        <li>High cost & poor battery life limiting sustained use</li>
+        <li>Partial independence only — users still rely on others for guidance</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="img-grid-2 reveal">
+    <div>
+      <img src="echowear/context1.png" alt="Research">
+      <p class="img-caption">HARIS profiling & user observation — understanding existing navigation challenges</p>
+    </div>
+    <div>
+      <img src="echowear/context2.png" alt="Context">
+      <p class="img-caption">Field research — navigating unfamiliar environments</p>
+    </div>
+  </div>
+
+  <div class="section-row reveal">
+    <div class="row-label">Ideation</div>
+    <div class="row-body">
+      <h3>CONCEPT EXPLORATION</h3>
+      <p>Multiple form factors were explored — from textile patches and wrist buckles to visual glasses and collar bands. Each was evaluated for wearability, social acceptance, technical feasibility, and effectiveness.</p>
+      <ul>
+        <li>Textile patch — ultrasonic sensors with haptic feedback</li>
+        <li>Wearable navigation band — wrist-mounted with gesture control</li>
+        <li>Visual glasses — bone conduction + ToF camera</li>
+        <li>Chest clip + collar band — final direction pursued</li>
+        <li>Grip navigator — handheld alternative</li>
+        <li>Torch aid — cane attachment concept</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <img class="img-full" style="aspect-ratio:21/9" src="echowear/ideation.png" alt="Ideation sketches">
+    <p class="img-caption">Ideation — exploring multiple form factors and interaction strategies</p>
+  </div>
+
+  <div class="section-row reveal">
+    <div class="row-label">Finalized Design</div>
+    <div class="row-body">
+      <h3>ECHOWEAR — COLLAR FORM</h3>
+      <p>The finalized concept is a lightweight, ergonomic wearable collar that keeps ears open through bone conduction technology. The collar form was chosen for its unobtrusive presence, 360° sensor coverage, and social acceptance.</p>
+      <ul>
+        <li>Front cameras — depth sensing and echo detection</li>
+        <li>Back camera — rear obstacle awareness</li>
+        <li>Bone conduction technology — audio feedback without blocking ears</li>
+        <li>Vibration sensors — directional haptic warnings</li>
+        <li>GPS tracker — location and navigation support</li>
+        <li>Emergency SOS button — immediate distress alert</li>
+        <li>Bluetooth + Charging point — connectivity and power</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="feature-grid reveal">
+    <div class="feature-item">
+      <h4>Bone Conduction</h4>
+      <p>Internal bone conduction technology transmits audio through the skull, keeping ears completely open to ambient sound — critical for safety.</p>
+    </div>
+    <div class="feature-item">
+      <h4>Omnidirectional Awareness</h4>
+      <p>Depth-sensing front cameras + echo detection create full spatial awareness without requiring constant head movement.</p>
+    </div>
+    <div class="feature-item">
+      <h4>Material Choice</h4>
+      <p>Medical-grade silicone and TPU ensure skin-safe comfort and durability. Snap-fit and magnetic components simplify assembly and cleaning.</p>
+    </div>
+    <div class="feature-item">
+      <h4>Custom PCB</h4>
+      <p>MEMS microphones, Bluetooth, and GPS integrated on a custom PCB for compact, efficient processing of all sensor data.</p>
+    </div>
+    <div class="feature-item">
+      <h4>Scalable Production</h4>
+      <p>System transitions from 3D-printed prototypes to injection molding and CNC-machined precision parts for scalable manufacturing.</p>
+    </div>
+    <div class="feature-item">
+      <h4>Emergency SOS</h4>
+      <p>Single-button emergency response system sends location and alert to preset contacts immediately — enhancing safety and peace of mind.</p>
+    </div>
+  </div>
+
+  <div class="img-grid-4 reveal">
+  <div>
+    <img src="echowear/mint.png" alt="Mint">
+    <p class="img-caption">Mint</p>
+  </div>
+  <div>
+    <img src="echowear/lavendar.png" alt="Lavender">
+    <p class="img-caption">Lavender</p>
+  </div>
+  <div>
+    <img src="echowear/noir.png" alt="Noir">
+    <p class="img-caption">Noir</p>
+  </div>
+  <div>
+    <img src="echowear/blush.png" alt="Blush">
+    <p class="img-caption">Blush</p>
+  </div>
+</div>
+
+  <div class="outcome-box reveal">
+    <p>The final design is a lightweight, ergonomic wearable navigation device that enhances spatial awareness while keeping the user's ears open through bone conduction technology. Integrated depth-sensing and echo detection enable omnidirectional obstacle awareness, supported by a customized PCB with MEMS microphones, Bluetooth, and GPS for navigation and emergency response. Medical-grade silicone and TPU ensure comfort and durability, while snap-fit and magnetic components simplify assembly. Designed for scalable production, the system transitions from 3D-printed prototypes to injection molding and CNC-machined precision parts.</p>
+  </div>
+</div>
+
+<div class="proj-nav">
+  <a class="proj-nav-link" href="project-revive.html">
+    <span>← Previous</span>
+    <strong>REVIVE</strong>
+  </a>
+  <a class="proj-nav-link pn-next" href="project-shaze.html">
+    <span>Next Project →</span>
+    <strong>SHAZÉ BARWARE</strong>
+  </a>
+</div>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px'})
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-20)+'px';ring.style.top=(ry-20)+'px';requestAnimationFrame(animRing)}
+animRing()
+const obs=new IntersectionObserver(e=>{e.forEach(r=>{if(r.isIntersecting)r.target.classList.add('visible')})},{threshold:0.1})
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r))
+</script>
+</body>
+</html>

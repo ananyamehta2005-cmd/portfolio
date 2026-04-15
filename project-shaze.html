@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shazé Barware — Ananya Mehta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a08;--bg2:#111110;--accent:#C0392B;--text:#f0ede8;--muted:#888880;--border:#2a2a26;--card:#141412;--gold:#b8860b}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.1s;mix-blend-mode:difference}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 4vw;display:flex;justify-content:space-between;align-items:center}
+nav::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,8,0.95),transparent);pointer-events:none;z-index:-1}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.15em;color:var(--text);text-decoration:none}
+.back-btn{display:flex;align-items:center;gap:0.75rem;color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s}
+.back-btn:hover{color:var(--accent)}
+.proj-hero{height:90vh;position:relative;display:flex;align-items:flex-end;padding:6rem 4vw 4rem;overflow:hidden}
+.proj-hero-bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;filter:brightness(0.25)}
+.proj-hero-grad{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 20%,rgba(10,10,8,0.3) 60%,transparent 100%)}
+.proj-hero-content{position:relative;z-index:1;max-width:1400px;width:100%;margin:0 auto}
+.proj-category{font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,11rem);line-height:0.9;color:var(--text);margin-bottom:2rem}
+.proj-meta{display:flex;gap:4rem;flex-wrap:wrap}
+.proj-meta-item label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem}
+.proj-meta-item span{font-size:0.9rem;color:var(--muted)}
+.proj-content{max-width:1400px;margin:0 auto;padding:6rem 4vw}
+.proj-intro{font-family:'DM Serif Display',serif;font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.55;color:var(--text);margin-bottom:5rem;font-style:italic;max-width:900px}
+.section-row{display:grid;grid-template-columns:280px 1fr;gap:6rem;margin-bottom:6rem}
+.row-label{font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);padding-top:0.4rem}
+.row-body h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:1.5rem}
+.row-body p{font-size:1rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;font-weight:300}
+.row-body ul{list-style:none;padding:0}
+.row-body ul li{padding:0.7rem 0;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.95rem;display:flex;align-items:flex-start;gap:1rem}
+.row-body ul li::before{content:'—';color:var(--gold);flex-shrink:0}
+.img-full{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+.img-grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+    margin-top:3rem;   /* 👈 THIS CREATES SPACE FROM IDEATION */
+    margin-bottom:3rem;
+}
+
+.img-grid-3 div{
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#111;
+}
+
+.img-grid-3 img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}
+.img-caption{font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);margin-top:0.75rem;text-transform:uppercase}
+.section-subtitle{
+    font-size:0.9rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:1rem;
+    margin-top:2rem;
+}
+.design-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);margin:3rem 0}
+.pillar{padding:2rem 1.5rem;border-right:1px solid var(--border)}
+.pillar:last-child{border-right:0}
+.pillar h4{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.pillar p{font-size:0.85rem;color:var(--muted);line-height:1.7}
+.outcome-box{background:var(--bg2);border:1px solid var(--border);padding:4rem;margin:5rem 0;position:relative;overflow:hidden}
+.outcome-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.outcome-box p{font-size:1rem;line-height:1.9;color:var(--muted);font-weight:300}
+.proj-nav{border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;padding:4rem 4vw;max-width:1400px;margin:0 auto;gap:3rem}
+.proj-nav-link{text-decoration:none;padding:2rem;border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden}
+.proj-nav-link::before{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity 0.3s}
+.proj-nav-link:hover{border-color:var(--accent)}
+.proj-nav-link:hover::before{opacity:0.05}
+.proj-nav-link span{display:block;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;position:relative;z-index:1}
+.proj-nav-link strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;color:var(--text);position:relative;z-index:1}
+.pn-next{text-align:right}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s,transform 0.8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+    .section-row{grid-template-columns:1fr}
+    .img-grid-2{grid-template-columns:1fr}
+    .img-grid-3{grid-template-columns:1fr}
+}
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
+}
+@media(max-width:600px){
+    .design-pillars{
+        grid-template-columns:1fr;
+    }
+}</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a class="nav-logo" href="index.html">AM.</a>
+  <a class="back-btn" href="index.html"><span>←</span><span>All Work</span></a>
+</nav>
+
+<div class="proj-hero">
+  <img class="proj-hero-bg" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1800&q=80" alt="Shaze Barware">
+  <div class="proj-hero-grad"></div>
+  <div class="proj-hero-content">
+    <div class="proj-category">04 — Luxury Product Design</div>
+    <div class="proj-title">SHAZÉ<br>BARWARE</div>
+    <div class="proj-meta">
+      <div class="proj-meta-item"><label>Type</label><span>Individual Project</span></div>
+      <div class="proj-meta-item"><label>Role</label><span>Brand Research · Concept Development · Form Exploration · Product Design</span></div>
+      <div class="proj-meta-item"><label>Domain</label><span>Luxury Product Design</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-content">
+  <p class="proj-intro reveal">
+    "A sculptural barware collection designed to reinterpret tea and cocktail rituals through contemporary form, material expression, and refined user interaction — aligned with Shazé's design philosophy."
+  </p>
+
+  <div class="section-row reveal">
+    <div class="row-label">Design Direction</div>
+    <div class="row-body">
+      <h3>FORM & PHILOSOPHY</h3>
+      <p>The design intent was to reinterpret cocktail rituals as expressive experiences by transforming functional serving objects into bold, sculptural statement pieces. The design balances contemporary form with craftsmanship, creating objects that feel refined, tactile, and visually distinctive while remaining purposeful in use.</p>
+      <ul>
+        <li>Form language — geometric structure softened by fluid, organic transitions</li>
+        <li>Material — solid brass, chosen for tactile richness, durability, sculptural presence</li>
+        <li>Polished for vibrancy, antiqued for grounded sophistication</li>
+        <li>Ergonomic designs that enhance user experience without compromising form</li>
+        <li>Visual impact — pieces designed to feel like jewels of the bar</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="design-pillars reveal">
+    <div class="pillar">
+      <h4>Form Language</h4>
+      <p>Geometric meets organic — bold lines softened with fluid curves, creating visual tension.</p>
+    </div>
+    <div class="pillar">
+      <h4>Materiality</h4>
+      <p>100% brass — polished for vibrancy, antiqued for grounded sophistication.</p>
+    </div>
+    <div class="pillar">
+      <h4>Functionality</h4>
+      <p>Ergonomic designs that enhance user experience without compromising sculptural form.</p>
+    </div>
+    <div class="pillar">
+      <h4>Visual Impact</h4>
+      <p>Pieces designed to feel like jewels of the bar — collectible, distinctive, exquisite.</p>
+    </div>
+  </div>
+
+  <div class="img-grid-2 reveal">
+  <div>
+    <img src="SHAZE/moodboard1.png" alt="Moodboard 1">
+    <p class="img-caption">Moodboard — material, form and luxury direction</p>
+  </div>
+  </div>
+
+  <div class="section-row reveal">
+    <div class="row-label">Ideation</div>
+    <div class="row-body">
+      <h3>CONCEPT EXPLORATION</h3>
+      <p>Ideation explored multiple object typologies within barware — bottle openers, bottle stoppers, cocktail stirrers, strainers, and shakers. Each was explored in both hand-drawn sketch and digital 3D form to evaluate sculptural potential.</p>
+      <ul>
+        <li>Bottle openers — key form, compass form, shell circular form</li>
+        <li>Bottle stoppers — splash form, anchor, artefact-inspired</li>
+        <li>Stirrers & bar spoons — elongated forms with decorative heads</li>
+        <li>Strainer — circular disc with handle, ornamental perforations</li>
+        <li>Final collection — cohesive family of objects sharing geometric-organic vocabulary</li>
+      </ul>
+    </div>
+  </div>
+
+ <!-- IDEATION -->
+<div class="reveal">
+    <img class="img-full" src="SHAZE/ideation.png" alt="Ideation">
+    <p class="img-caption">Ideation sketches — exploring bottle openers, stoppers, and stirrer forms</p>
+</div>
+
+<!-- FINAL PRODUCT HEADING -->
+<h3 class="section-subtitle">Final Product</h3>
+
+<!-- FINAL PRODUCT GRID -->
+<div class="img-grid-3">
+    <div><img src="SHAZE/opener.png"></div>
+    <div><img src="SHAZE/completeset.png"></div>
+    <div><img src="SHAZE/jigger.png"></div>
+</div>
+    
+  <div class="outcome-box reveal">
+    <p>The final outcome is a sculptural cocktail serving ensemble that transforms ritual into an experiential statement. Designed with bold geometry and refined detailing, the collection balances artistic expression with functional precision. Premium materials and meticulous craftsmanship reinforce Shazé's uncompromising quality, while contemporary forms introduce a sense of audacious individuality. Each element is thoughtfully resolved to elevate both hosting and gifting, resulting in a distinctive, high-design piece that embodies sophistication, exclusivity, and expressive luxury.</p>
+  </div>
+</div>
+
+<div class="proj-nav">
+  <a class="proj-nav-link" href="project-echowear.html">
+    <span>← Previous</span>
+    <strong>ECHOWEAR</strong>
+  </a>
+  <a class="proj-nav-link pn-next" href="project-leopard.html">
+    <span>Next Project →</span>
+    <strong>LEOPARD</strong>
+  </a>
+</div>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px'})
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-20)+'px';ring.style.top=(ry-20)+'px';requestAnimationFrame(animRing)}
+animRing()
+const obs=new IntersectionObserver(e=>{e.forEach(r=>{if(r.isIntersecting)r.target.classList.add('visible')})},{threshold:0.1})
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r))
+</script>
+</body>
+</html>
